@@ -1,13 +1,13 @@
 VER BIEN LOS FLAGGS DE LA CONEXION TCP flags [SA]
 
-ACK – The ACK flag, which stands for “Acknowledgment”, is used to acknowledge the successful receipt of a packet. As we can see from the diagram above, the receiver sends an ACK as well as a SYN in the second step of the 3-way handshake process to tell the sender that it received its initial packet.
-FIN – The FIN flag, which stands for “Finished”, means there is no more data from the sender. Therefore, it is used in the last packet sent from the sender.
-URG – The URG flag is used to notify the receiver to process the urgent packets before processing all other packets. The receiver will be notified when all known urgent data has been received. See RFC 6093 for more details.
-PSH – The PSH flag, which stands for “Push”, is somewhat similar to the URG flag and tells the receiver to process these packets as they are received instead of buffering them.
-RST – The RST flag, which stands for “Reset”, gets sent from the receiver to the sender when a packet is sent to a particular host that was not expecting it.
-ECE – This flag is responsible for indicating if the TCP peer is ECN capable. See RFC 3168 for more details.
-CWR – The CWR flag, which stands for Congestion Window Reduced, is used by the sending host to indicate it received a packet with the ECE flag set. See RFC 3168 for more details.
-NS (experimental) – The NS flag, which stands for Nonce Sum, is still an experimental flag used to help protect against accidental malicious concealment of packets from the sender. See RFC 3540 for more details.
+ * ACK – The ACK flag, which stands for “Acknowledgment”, is used to acknowledge the successful receipt of a packet. As we can see from the diagram above, the receiver sends an ACK as well as a SYN in the second step of the 3-way handshake process to tell the sender that it received its initial packet.
+ * FIN – The FIN flag, which stands for “Finished”, means there is no more data from the sender. Therefore, it is used in the last packet sent from the sender.
+ * URG – The URG flag is used to notify the receiver to process the urgent packets before processing all other packets. The receiver will be notified when all known urgent data has been received. See RFC 6093 for more details.
+ * PSH – The PSH flag, which stands for “Push”, is somewhat similar to the URG flag and tells the receiver to process these packets as they are received instead of buffering them.
+ * RST – The RST flag, which stands for “Reset”, gets sent from the receiver to the sender when a packet is sent to a particular host that was not expecting it.
+ * ECE – This flag is responsible for indicating if the TCP peer is ECN capable. See RFC 3168 for more details.
+ * CWR – The CWR flag, which stands for Congestion Window Reduced, is used by the sending host to indicate it received a packet with the ECE flag set. See RFC 3168 for more details.
+ * NS (experimental) – The NS flag, which stands for Nonce Sum, is still an experimental flag used to help protect against accidental malicious concealment of packets from the sender. See RFC 3540 for more details.
 
 
 
@@ -62,7 +62,6 @@ SMTP	25
       * ambos tienen capa de aplicaciones pero brindan servicios distintos.
       * ambos tienen capa de transporte y de red similares.
       * TCP/IP combina la capa de presentacion y de sesion en la capa de Aplicacion.
-      * TCP/IP combina la capa de enlace de datos y la capa fisica del modelo OSI en una sola capa.
       * OSI fue definido antes de implementar los protocolos, por lo que algunas funcionalidades
         necesarias no existen o fallan. En cambio TCP/IP se creo despues que los protocolos, por
         lo que se amolda a ellos perfectamente
@@ -86,7 +85,7 @@ SMTP	25
 
 
   * ## HTTP:80 (Hyper Text Transfer Protocol, command curl)
-      > Protocolo de capa de aplicacion que da sopoerte a transferencia de objetos de la web.
+      > Protocolo de capa de aplicacion que da soporte a transferencia de objetos de la web.
       > Define los mensajes __solicitud y respuesta__ que pueden enviarse, formato y orden,
       > se implementa en cliente y servidor.
 
@@ -106,50 +105,47 @@ SMTP	25
 
   * ## FTP
 
-         >   (File Transfer Protocol) permite transferir archivos desde y hasta un host
-         > remoto, con autentificación por medio de usuario y contraseña.
+     (File Transfer Protocol) permite transferir archivos desde y hasta un host
+    remoto, con autentificación por medio de usuario y contraseña.
 
-        >  El funcionamiento del protocolo FTP trabaja en un modelo cliente/servidor, pero se distingue de los
-        > demás servicios por el hecho de usar una conexión para el protocolo de control (Out-Of-Band Control) y
-        > otra conexión para la transferencia de datos. El protocolo FTP se ejecuta sobre TCP porque requiere un
-        > protocolo de transporte que le brinde detección de errores (confiabilidad).
+     El funcionamiento del protocolo FTP trabaja en un modelo cliente/servidor, pero se distingue de los
+    demás servicios por el hecho de usar una conexión para el protocolo de control (Out-Of-Band Control) y
+    otra conexión para la transferencia de datos. El protocolo FTP se ejecuta sobre TCP porque requiere un
+    protocolo de transporte que le brinde detección de errores (confiabilidad).
 
-         > 20/tcp data port
-         > 21/tcp control port
+    > 20/tcp data port
+    > 21/tcp control port
 
-         * **Modo activo (servidor):** el servidor siempre crea el canal de datos en su puerto 20, mientras que del
-         lado del cliente el canal de datos se asocia a un puerto  mayor a 1024. El cliente le dice al servidor
-         por el canal de control que puerto usara.
+   * **Modo activo (servidor):** el servidor siempre crea el canal de datos en su puerto 20, mientras que del
+   lado del cliente el canal de datos se asocia a un puerto  mayor a 1024. El cliente le dice al servidor
+   por el canal de control que puerto usara.
 
-         * **Modo pasivo:** el cliente se conecta al con el servidor, este le manda por el canal de control, el puero mayor
-         a 1024 del servidor al q debe conectarse el cliente. Tras cada envio se cierra el canal de datos.
+   * **Modo pasivo:** el cliente se conecta al con el servidor, este le manda por el canal de control, el puero mayor
+   a 1024 del servidor al q debe conectarse el cliente. Tras cada envio se cierra el canal de datos.
 
   * ##  TFTP (trivial file transfer protocol)
-      > Es un protocolo de transferencia de archivos muy simple que trabaja sobre UDP, al no ser
-      > orientado a conexiones, no tiene autenticacion de usuario, encriptacion, y no puede listar
-      > contenido de directorios. Los archivos se transmiten en segmentos de 512 bytes, exepto el
-      > ultimo que debe ser inferior para indicar el fin de la transmision.
+       Es un protocolo de transferencia de archivos muy simple que trabaja sobre UDP, al no ser
+       orientado a conexiones, no tiene autenticacion de usuario, encriptacion, y no puede listar
+       contenido de directorios. Los archivos se transmiten en segmentos de 512 bytes, exepto el
+       ultimo que debe ser inferior para indicar el fin de la transmision.
 
   * ## DNS:53 (command dig)
 
-        > Los name server mantienen registros de recursos (RR) con un mapeo __hostname__<==>__IP__
-        > en una cuadrupla (name, value, type, TTL)
-
-      **A:** direccion IP.
-      **NS:** servidores de nombres que tiene autoridad para el dominio.
-      **SOA:** indica que los registros siguientes de la base de datos conrresponden
-      a informacion autoritativa
-      **PTR:** indica el dominio de la ip consultada.
-      **AAA:** igual que **A** pero para **IPV6**.
-      **CNAME:** permine identificar alias o subdominios equivalentes.
-      **MX:** servidor de correo electronico para el dominio.
+    * **A:** direccion IP.
+    **NS:** servidores de nombres que tiene autoridad para el dominio.
+    * **SOA:** indica que los registros siguientes de la base de datos conrresponden
+    a informacion autoritativa
+    * **PTR:** indica el dominio de la ip consultada.
+    * **AAA:** igual que **A** pero para **IPV6**.
+    * **CNAME:** permine identificar alias o subdominios equivalentes.
+    * **MX:** servidor de correo electronico para el dominio.
 
 
       **Servidor DNS** es una base de datos distribuida implementada en una
     jerarquía de servidores de nombres.
 
-      **DNS protocolo** de capa de aplicación que permite a los hosts y dichos
-    servidores comunicarse para proveer el servicio de traducción, entre la
+      **DNS** protocolo de capa de aplicación que permite a los hosts y
+    servidores DNS comunicarse para proveer el servicio de traducción, entre la
     dirección mnemónica y la dirección IP.
       Un host hace su solicitud a un servidor local de nombres, que, si no posee
     la traducción, se transforma en un cliente consultando a un servidor raíz
@@ -157,18 +153,18 @@ SMTP	25
     de nombres para el dominio que se intenta resolver, envía la solicitud
     terminando la cadena; si lo desconoce, consulta a servidores intermedios
     hasta que eventualmente alguno lo conozca. En cada uno de los paso, los
-    servidor podríam tener registrado el IP del dominio consultado o mantenerlo
+    servidor podrían tener registrado el IP del dominio consultado o mantenerlo
     en cache por una consulta anterior, ofreciendo una respuesta directa.
 
         TLD:    .com  .org .net .info
-        g-TDL
+        g-TDL: .ar .tv .bo
 
       **Respuesta authoritative:** es aquella entregada por el servidor oficial
       para el nombre de dominio consultado, es decir, que ningún servidor local,
       raíz ni intermedio respondió con información de caché.
 
       **Consulta DNS Recursiva:** Un host realiza una consulta a un servidor,
-      éste se encarga de obtener la resolución de IP y devuelve la respuesta al
+      éste se encarga de obtener la respuesta y entregarsela al
       host.
 
       **Consulta DNS Iterativa:** Un *name server* realiza una consulta a un
